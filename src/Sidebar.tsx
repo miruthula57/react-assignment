@@ -8,19 +8,20 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 interface MenuProps {
   onMenuClick: (category: string) => void;
 }
 
 const Sidebar = (props: MenuProps) => {
-  const API_URL = process.env.REACT_APP_API_BASE_URL;
   const { onMenuClick } = props;
   const [categories, setCategoriesData] = useState<any[]>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [categoriesIVFData, setcategoriesIVFData] = useState<any[]>([]);
   const [hideData, setHideData] = useState<any>(false);
+
+  const API_URL = useMemo(() => process.env.REACT_APP_API_BASE_URL, []);
 
   useEffect(() => {
     const fetchData = async () => {

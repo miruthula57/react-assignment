@@ -10,19 +10,20 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 interface DataTableProps {
   category: string | null;
 }
 
 const DataTable = (props: DataTableProps) => {
-  const API_URL = process.env.REACT_APP_API_BASE_URL;
   const { category } = props;
   const [frequentData, setFrequentData] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   const rowsPerPage = 10;
+
+  const API_URL = useMemo(() => process.env.REACT_APP_API_BASE_URL, []);
 
   useEffect(() => {
     const fetchData = async () => {
