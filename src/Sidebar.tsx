@@ -14,6 +14,8 @@ interface MenuProps {
   onMenuClick: (category: string) => void;
 }
 
+const API_URL = process.env.REACT_APP_API_BASE_URL;
+
 const Sidebar = (props: MenuProps) => {
   const { onMenuClick } = props;
   const [categories, setCategoriesData] = useState<any[]>([]);
@@ -23,7 +25,6 @@ const Sidebar = (props: MenuProps) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const API_URL = process.env.REACT_APP_API_BASE_URL;
       try {
         const response = await fetch(`${API_URL}/categories`);
         if (!response.ok) {

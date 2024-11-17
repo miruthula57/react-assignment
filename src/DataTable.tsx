@@ -16,6 +16,8 @@ interface DataTableProps {
   category: string | null;
 }
 
+const API_URL = process.env.REACT_APP_API_BASE_URL;
+
 const DataTable = (props: DataTableProps) => {
   const { category } = props;
   const [frequentData, setFrequentData] = useState<any[]>([]);
@@ -25,7 +27,6 @@ const DataTable = (props: DataTableProps) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const API_URL = process.env.REACT_APP_API_BASE_URL;
       try {
         const url =
           category === "IVF"
