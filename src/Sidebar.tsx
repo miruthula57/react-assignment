@@ -15,6 +15,7 @@ interface MenuProps {
 }
 
 const Sidebar = (props: MenuProps) => {
+  const API_URL = process.env.REACT_APP_API_BASE_URL;
   const { onMenuClick } = props;
   const [categories, setCategoriesData] = useState<any[]>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -24,7 +25,7 @@ const Sidebar = (props: MenuProps) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3030/categories");
+        const response = await fetch(`${API_URL}/categories`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -35,7 +36,7 @@ const Sidebar = (props: MenuProps) => {
       }
     };
     fetchData();
-  }, []);
+  }, [API_URL]);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);

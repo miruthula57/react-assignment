@@ -42,7 +42,7 @@ const DataTable = (props: DataTableProps) => {
       }
     };
     fetchData();
-  }, [category]);
+  }, [category,API_URL]);
 
   const totalPages = Math.ceil(frequentData.length / rowsPerPage);
   const paginatedData = frequentData.slice(
