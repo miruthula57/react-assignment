@@ -36,7 +36,7 @@ const Sidebar = (props: MenuProps) => {
       }
     };
     fetchData();
-  }, [API_URL]);
+  }, []);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
