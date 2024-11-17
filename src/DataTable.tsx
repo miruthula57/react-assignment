@@ -10,7 +10,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface DataTableProps {
   category: string | null;
@@ -23,10 +23,9 @@ const DataTable = (props: DataTableProps) => {
 
   const rowsPerPage = 10;
 
-  const API_URL = useMemo(() => process.env.REACT_APP_API_BASE_URL, []);
-
   useEffect(() => {
     const fetchData = async () => {
+      const API_URL = process.env.REACT_APP_API_BASE_URL;
       try {
         const url =
           category === "IVF"
