@@ -2,7 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "homepage":"https://miruthula57.github.io/react-assignment",
+  "homepage": "https://miruthula57.github.io/react-assignment",
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
@@ -19,6 +19,7 @@
     "ajv": "^8.17.1",
     "ajv-errors": "^3.0.0",
     "ajv-formats": "^3.0.1",
+    "axios": "^1.7.7",
     "formik": "^2.4.6",
     "material-icons": "^1.13.12",
     "react": "^18.3.1",

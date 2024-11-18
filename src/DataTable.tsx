@@ -10,6 +10,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 interface DataTableProps {
@@ -32,18 +33,15 @@ const DataTable = (props: DataTableProps) => {
           category === "IVF"
             ? `${API_URL}/frequent2`
             : `${API_URL}/frequent`;
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        setFrequentData(data);
-      } catch (err: any) {
-      } finally {
+        const response = await axios.get(url);
+        setFrequentData(response.data); 
+      } catch (err) {
+        console.error('Error fetching data:', err);
       }
     };
+  
     fetchData();
-  }, [category]);
+  }, [category, API_URL]);
 
   const totalPages = Math.ceil(frequentData.length / rowsPerPage);
   const paginatedData = frequentData.slice(

@@ -11,8 +11,8 @@ import Navbar from "./Navbar";
 const initialValues = { name: "", email: "" };
 
 const LoginData = [
-  { id: 1, name: "Miruthula", email: "miru@g.com" },
-  { id: 2, name: "nan", email: "nan@g.com" },
+  { id: 1, name: "test", email: "test@gmail.com" },
+  { id: 2, name: "ABC", email: "abc@gmail.com" },
 ];
 
 const LoginModal = () => {

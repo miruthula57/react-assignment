@@ -8,6 +8,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 interface MenuProps {
@@ -26,19 +27,22 @@ const Sidebar = (props: MenuProps) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${API_URL}/categories`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        setCategoriesData(data);
-      } catch (err: any) {
-      } finally {
+        const response = await axios.get(`${API_URL}/categories`, {
+          params: {
+            _page: 1, // Fetch the first page
+            _limit: 10, // Limit to 10 records
+          },
+        });
+        const responseSize = JSON.stringify(response.data).length;
+    console.log('Response size:', responseSize, 'bytes');
+        setCategoriesData(response.data); 
+      } catch (err) {
+        console.error('Error fetching categories:', err);
       }
     };
-    fetchData();
-  }, []);
 
+    fetchData();
+  }, [API_URL]);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -46,33 +50,26 @@ const Sidebar = (props: MenuProps) => {
   const handleClose = async (category: string) => {
     onMenuClick(category);
     try {
-      const response = await fetch("http://localhost:3030/categories1");
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.json();
-      setcategoriesIVFData(data);
+      const response = await axios.get("http://localhost:3030/categories1");
+      setcategoriesIVFData(response.data);
       setHideData(true);
       setAnchorEl(null);
-    } catch (err: any) {
-    } finally {
+    } catch (err) {
+      console.error('Error fetching categories:', err);
     }
   };
 
-  const handleFunction = async () => {
-    try {
-      const response = await fetch("http://localhost:3030/categories");
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.json();
-      setCategoriesData(data);
-      setHideData(false);
-      setAnchorEl(null);
-    } catch (err: any) {
-    } finally {
-    }
-  };
+ 
+const handleFunction = async () => {
+  try {
+    const response = await axios.get("http://localhost:3030/categories");
+    setCategoriesData(response.data); 
+    setHideData(false);
+    setAnchorEl(null);
+  } catch (err) {
+    console.error('Error fetching categories:', err);
+  }
+};
 
   return (
     <>
