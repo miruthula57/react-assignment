@@ -33,7 +33,10 @@ const DataTable = (props: DataTableProps) => {
           category === "IVF"
             ? `${API_URL}/frequent2`
             : `${API_URL}/frequent`;
-        const response = await axios.get(url);
+        const response = await axios.get(url, {
+          maxContentLength: Infinity,
+          maxBodyLength: Infinity,
+        });
         setFrequentData(response.data); 
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -41,7 +44,7 @@ const DataTable = (props: DataTableProps) => {
     };
   
     fetchData();
-  }, [category, API_URL]);
+  }, [category]);
 
   const totalPages = Math.ceil(frequentData.length / rowsPerPage);
   const paginatedData = frequentData.slice(

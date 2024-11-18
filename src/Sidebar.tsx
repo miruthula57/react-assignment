@@ -28,13 +28,11 @@ const Sidebar = (props: MenuProps) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}/categories`, {
-          params: {
-            _page: 1, // Fetch the first page
-            _limit: 10, // Limit to 10 records
-          },
+          maxContentLength: Infinity,
+          maxBodyLength: Infinity,
         });
         const responseSize = JSON.stringify(response.data).length;
-    console.log('Response size:', responseSize, 'bytes');
+        console.log('Response size:', responseSize, 'bytes');
         setCategoriesData(response.data); 
       } catch (err) {
         console.error('Error fetching categories:', err);
@@ -42,7 +40,7 @@ const Sidebar = (props: MenuProps) => {
     };
 
     fetchData();
-  }, [API_URL]);
+  }, []);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -50,7 +48,10 @@ const Sidebar = (props: MenuProps) => {
   const handleClose = async (category: string) => {
     onMenuClick(category);
     try {
-      const response = await axios.get("http://localhost:3030/categories1");
+      const response = await axios.get(`${API_URL}/categories1`, {
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+      });
       setcategoriesIVFData(response.data);
       setHideData(true);
       setAnchorEl(null);
@@ -62,7 +63,10 @@ const Sidebar = (props: MenuProps) => {
  
 const handleFunction = async () => {
   try {
-    const response = await axios.get("http://localhost:3030/categories");
+    const response = await axios.get(`${API_URL}/categories`, {
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity,
+    });
     setCategoriesData(response.data); 
     setHideData(false);
     setAnchorEl(null);
