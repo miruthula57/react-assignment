@@ -54,6 +54,7 @@ const Sidebar = (props: MenuProps) => {
 
  
 const handleFunction = async () => {
+  onMenuClick("IND");
   try {
     const response = await axios.get(`${API_URL}/categories`);
     setCategoriesData(response.data); 
