@@ -33,10 +33,7 @@ const DataTable = (props: DataTableProps) => {
           category === "IVF"
             ? `${API_URL}/frequent2`
             : `${API_URL}/frequent`;
-        const response = await axios.get(url, {
-          maxContentLength: Infinity,
-          maxBodyLength: Infinity,
-        });
+        const response = await axios.get(url);
         setFrequentData(response.data); 
       } catch (err) {
         console.error('Error fetching data:', err);

@@ -27,12 +27,7 @@ const Sidebar = (props: MenuProps) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/categories`, {
-          maxContentLength: Infinity,
-          maxBodyLength: Infinity,
-        });
-        const responseSize = JSON.stringify(response.data).length;
-        console.log('Response size:', responseSize, 'bytes');
+        const response = await axios.get(`${API_URL}/categories`);
         setCategoriesData(response.data); 
       } catch (err) {
         console.error('Error fetching categories:', err);
@@ -48,10 +43,7 @@ const Sidebar = (props: MenuProps) => {
   const handleClose = async (category: string) => {
     onMenuClick(category);
     try {
-      const response = await axios.get(`${API_URL}/categories1`, {
-        maxContentLength: Infinity,
-        maxBodyLength: Infinity,
-      });
+      const response = await axios.get(`${API_URL}/categories1`);
       setcategoriesIVFData(response.data);
       setHideData(true);
       setAnchorEl(null);
@@ -63,10 +55,7 @@ const Sidebar = (props: MenuProps) => {
  
 const handleFunction = async () => {
   try {
-    const response = await axios.get(`${API_URL}/categories`, {
-      maxContentLength: Infinity,
-      maxBodyLength: Infinity,
-    });
+    const response = await axios.get(`${API_URL}/categories`);
     setCategoriesData(response.data); 
     setHideData(false);
     setAnchorEl(null);
